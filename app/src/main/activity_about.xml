@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0A0A0A"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Секция: Туториал -->
+        <TextView
+            android:id="@+id/tv_tutorial_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_title"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <!-- Каждый пункт туториала — отдельный TextView -->
+        <TextView
+            android:id="@+id/tutorial_item_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item1"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="12dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <TextView
+            android:id="@+id/tutorial_item_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item2"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="12dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <TextView
+            android:id="@+id/tutorial_item_3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item3"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="12dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <TextView
+            android:id="@+id/tutorial_item_4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item4"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="12dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <TextView
+            android:id="@+id/tutorial_item_5"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item5"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="12dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <TextView
+            android:id="@+id/tutorial_item_6"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item6"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="12dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <TextView
+            android:id="@+id/tutorial_item_7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_tutorial_item7"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp"
+            android:paddingBottom="24dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <!-- Секция: Разработчики -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_developers_title"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_developers_text"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:paddingBottom="24dp"
+            android:lineSpacingExtra="4dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+
+        <!-- Секция: Лицензия -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_license_title"
+            android:textColor="#FFFFFF"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            android:paddingBottom="8dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/section_license_text"
+            android:textColor="#CCCCCC"
+            android:textSize="16sp"
+            android:paddingBottom="24dp"
+            android:lineSpacingExtra="4dp"
+            android:includeFontPadding="true"
+            android:gravity="start|top" />
+    </LinearLayout>
+
+</ScrollView>
