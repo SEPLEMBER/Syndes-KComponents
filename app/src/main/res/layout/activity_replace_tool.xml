@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#0A0A0A"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/titleLabel"
+            android:text="Поиск и замена"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="12dp"
+            android:textColor="#FFBF00"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:id="@+id/etFind"
+            android:hint="Найти"
+            android:inputType="textMultiLine"
+            android:minLines="1"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#FFBF00"
+            android:textColor="#FFBF00"
+            android:textColorHint="#BF8F00"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etReplace"
+            android:hint="Заменить на"
+            android:inputType="textMultiLine"
+            android:minLines="1"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#FFBF00"
+            android:textColor="#FFBF00"
+            android:textColorHint="#BF8F00"
+            android:saveEnabled="false"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/etParams"
+            android:hint="Параметры (например, -r -i -e -w -n --dry-run)"
+            android:inputType="text"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="#FFBF00"
+            android:textColor="#FFBF00"
+            android:textColorHint="#BF8F00"
+            android:padding="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <CheckBox
+            android:id="@+id/cbPreviewOnly"
+            android:text="Только предпросмотр (показать совпадения перед применением)"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#FFBF00"
+            android:textColor="#FFBF00" />
+
+        <TextView
+            android:id="@+id/instruction"
+            android:text="Параметры:\n -r : рекурсивно\n -i : игнорировать регистр\n -e : искать как регулярное выражение (regex)\n -w : поиск целых слов\n -n : показывать номера строк в предпросмотре\n --dry-run : пробный запуск (без записи)\nИспользуйте 'Только предпросмотр', чтобы проверить изменения перед применением."
+            android:layout_marginBottom="12dp"
+            android:textColor="#FFBF00"
+            android:textSize="12sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <Button
+            android:id="@+id/btnChoose"
+            android:text="Выбрать папку (SAF)"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#222222"
+            android:textColor="#FFBF00"/>
+
+        <Button
+            android:id="@+id/btnReplace"
+            android:text="Заменить"
+            android:layout_marginBottom="12dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="#FFBF00"
+            android:textColor="#0A0A0A"/>
+
+        <TextView
+            android:id="@+id/tvStatus"
+            android:text=""
+            android:layout_marginTop="8dp"
+            android:textColor="#FFBF00"
+            android:saveEnabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+</ScrollView>

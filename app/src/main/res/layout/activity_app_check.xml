@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_frame"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000">
+
+    <!-- Основной UI -->
+    <LinearLayout
+        android:id="@+id/controls_panel"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="18dp"
+        android:layout_gravity="center"
+        android:visibility="visible">
+
+        <!-- Отступ сверху -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="40dp" />
+
+        <!-- Панель управления -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <EditText
+                android:id="@+id/edit_prefixes"
+                android:layout_weight="1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:hint="com.google, com.samsung  (через запятую)"
+                android:textColor="#AAFFFFFF"
+                android:textColorHint="#444444"
+                android:backgroundTint="#00FFEA"
+                android:inputType="text"
+                android:fontFamily="monospace"
+                android:padding="10dp" />
+
+            <Button
+                android:id="@+id/btn_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Сканировать"
+                android:layout_marginStart="8dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <Switch
+                android:id="@+id/switch_only_system"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Только системные"
+                android:checked="true"
+                android:textColor="#AAFFFFFF"
+                android:fontFamily="monospace" />
+
+            <Switch
+                android:id="@+id/switch_exclude_prefixes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Исключать префиксы"
+                android:checked="true"
+                android:layout_marginStart="18dp"
+                android:textColor="#AAFFFFFF"
+                android:fontFamily="monospace" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="8dp">
+
+            <Button
+                android:id="@+id/btn_permissions"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Анализ разрешений" />
+
+            <Button
+                android:id="@+id/btn_signatures"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Анализ подписей"
+                android:layout_marginStart="8dp" />
+
+            <Button
+                android:id="@+id/btn_export"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Экспорт"
+                android:layout_marginStart="8dp"/>
+        </LinearLayout>
+
+        <!-- Прогресс/статус -->
+        <TextView
+            android:id="@+id/tv_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#AAFFFFFF"
+            android:fontFamily="monospace"
+            android:textSize="12sp"
+            android:paddingBottom="6dp"
+            android:text="Готово" />
+
+        <!-- Список результатов -->
+        <ListView
+            android:id="@+id/list_results"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:dividerHeight="1dp"
+            android:paddingTop="6dp"
+            android:transcriptMode="normal" />
+    </LinearLayout>
+
+</FrameLayout>

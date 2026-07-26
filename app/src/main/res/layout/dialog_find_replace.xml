@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/dialog_find_replace"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="14dp"
+    android:background="@drawable/dialog_bg"
+    android:clipToPadding="false">
+
+    <!-- Поле поиска -->
+    <EditText
+        android:id="@+id/etFind"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/find_hint"
+        android:inputType="text"
+        android:background="@drawable/edit_bg_dark"
+        android:textColor="#E0E0E0"
+        android:textColorHint="#9E9E9E"
+        android:freezesText="false"
+        android:saveEnabled="false"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Поле замены -->
+    <EditText
+        android:id="@+id/etReplace"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/replace_hint"
+        android:inputType="text"
+        android:background="@drawable/edit_bg_dark"
+        android:textColor="#E0E0E0"
+        android:textColorHint="#9E9E9E"
+        android:freezesText="false"
+        android:saveEnabled="false"
+        android:padding="8dp"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Счётчик совпадений -->
+    <TextView
+        android:id="@+id/tvMatchesCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/matches_count"
+        android:textColor="#CCCCCC"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp" />
+
+    <!-- Кнопки управления -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingTop="8dp"
+        android:weightSum="4">
+
+        <Button
+            android:id="@+id/btnPrev"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&lt;" />
+
+        <Button
+            android:id="@+id/btnNext"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="&gt;" />
+
+        <Button
+            android:id="@+id/btnReplaceOne"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="R1" />
+
+        <Button
+            android:id="@+id/btnReplaceAll"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="RALL" />
+    </LinearLayout>
+</LinearLayout>
