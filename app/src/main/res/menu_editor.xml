@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- File -->
+    <item
+        android:id="@+id/menu_file"
+        android:title="@string/menu_file">
+        <menu>
+            <item
+                android:id="@+id/action_open"
+                android:title="@string/menu_open"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_save"
+                android:title="@string/menu_save"
+                app:showAsAction="always" />
+            <item
+                android:id="@+id/action_save_as"
+                android:title="@string/menu_save_as"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <!-- Edit -->
+    <item
+        android:id="@+id/menu_edit"
+        android:title="@string/menu_edit">
+        <menu>
+            <item
+                android:id="@+id/action_undo"
+                android:title="@string/menu_undo"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_redo"
+                android:title="@string/menu_redo"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_find"
+                android:title="@string/menu_find"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_copy"
+                android:title="@string/menu_copy"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_paste"
+                android:title="@string/menu_paste"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_select_all"
+                android:title="@string/menu_select_all"
+                app:showAsAction="never" />
+            <item
+                android:id="@+id/action_clear"
+                android:title="@string/menu_clear"
+                app:showAsAction="never" />
+        </menu>
+    </item>
+
+    <!-- Settings / About -->
+    <item
+        android:id="@+id/action_settings"
+        android:title="@string/menu_settings"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_about"
+        android:title="@string/menu_about"
+        app:showAsAction="never" />
+
+</menu>
