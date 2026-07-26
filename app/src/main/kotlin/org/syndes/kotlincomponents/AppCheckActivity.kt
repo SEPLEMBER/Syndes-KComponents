@@ -120,7 +120,7 @@ class AppCheckActivity : AppCompatActivity() {
         btnSignatures.setOnClickListener { analyzeSignatures() }
         btnExport.setOnClickListener { exportReportToClipboard() }
 
-        tvStatus.text = "Ready"
+        tvStatus.text = "Готово"
     }
 
     private fun setStatus(text: String) {
@@ -131,7 +131,7 @@ class AppCheckActivity : AppCompatActivity() {
         resultsList.clear()
         resultsMap.clear()
         adapter.notifyDataSetChanged()
-        setStatus("Scanning packages...")
+        setStatus("Сканирование пакетов...")
 
         val prefixes = parsePrefixes(editPrefixes.text.toString())
         val onlySystem = switchOnlySystem.isChecked
@@ -153,7 +153,7 @@ class AppCheckActivity : AppCompatActivity() {
                     pm.getInstalledPackages(PackageManager.GET_PERMISSIONS)
                 }
 
-                setStatus("Found ${installed.size} packages — filtering...")
+                setStatus("Найдено ${installed.size} пакетов — фильтрация...")
 
                 var processed = 0
                 for (pkg in installed) {
@@ -239,20 +239,20 @@ class AppCheckActivity : AppCompatActivity() {
                         resultsList.add(display)
                         resultsMap[pkg.packageName] = app
                         adapter.notifyDataSetChanged()
-                        setStatus("Scanned $processed / ${installed.size}")
+                        setStatus("Просканировано $processed / ${installed.size}")
                     }
                 }
 
-                setStatus("Scan complete: ${resultsList.size} items shown")
+                setStatus("Сканирование завершено: показано ${resultsList.size} элементов")
             } catch (t: Throwable) {
-                setStatus("Scan error: ${t.localizedMessage}")
+                setStatus("Ошибка сканирования: ${t.localizedMessage}")
             }
         }
     }
 
     private fun analyzePermissions() {
         if (resultsMap.isEmpty()) {
-            Toast.makeText(this, "No results to analyze. Run Scan first.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Нет результатов для анализа. Сначала запустите сканирование.", Toast.LENGTH_SHORT).show()
             return
         }
         lifecycleScope.launch(Dispatchers.IO) {
@@ -272,20 +272,20 @@ class AppCheckActivity : AppCompatActivity() {
             dangerCounts.sortByDescending { it.second }
             val top = dangerCounts.take(8)
             val sb = StringBuilder()
-            sb.append("Top apps by requested DANGEROUS permissions:\n\n")
+            sb.append("Топ приложений по запрошенным ОПАСНЫМ разрешениям:\n\n")
             for ((pkg, cnt) in top) {
                 val label = resultsMap[pkg]?.label ?: pkg
                 sb.append("${label} — $cnt\n")
             }
             withContext(Dispatchers.Main) {
-                showTextDialog("Permissions analysis", sb.toString())
+                showTextDialog("Анализ разрешений", sb.toString())
             }
         }
     }
 
     private fun analyzeSignatures() {
         if (resultsMap.isEmpty()) {
-            Toast.makeText(this, "No results to analyze. Run Scan first.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Нет результатов для анализа. Сначала запустите сканирование.", Toast.LENGTH_SHORT).show()
             return
         }
         lifecycleScope.launch(Dispatchers.Default) {
@@ -294,7 +294,7 @@ class AppCheckActivity : AppCompatActivity() {
             for ((pkg, entry) in resultsMap) {
                 val certs = entry.signatures
                 if (certs.isEmpty()) {
-                    map.computeIfAbsent("<no-signature>") { ArrayList() }.add(pkg)
+                    map.computeIfAbsent("<нет_подписи>") { ArrayList() }.add(pkg)
                 } else {
                     for (c in certs) {
                         map.computeIfAbsent(c.fingerprintSha256) { ArrayList() }.add(pkg)
@@ -305,55 +305,55 @@ class AppCheckActivity : AppCompatActivity() {
                 }
             }
             val sb = StringBuilder()
-            sb.append("Signature clusters (SHA-256):\n\n")
+            sb.append("Кластеры подписей (SHA-256):\n\n")
             val sorted = map.entries.sortedByDescending { it.value.size }
             for ((fingerprint, pkgs) in sorted) {
-                sb.append("${fingerprint} — ${pkgs.size} packages\n")
+                sb.append("${fingerprint} — ${pkgs.size} пакетов\n")
                 val sample = pkgs.take(6).map { resultsMap[it]?.label ?: it }
                 sb.append("  -> ${sample.joinToString(", ")}\n\n")
             }
 
             if (nonstandard.isNotEmpty()) {
-                sb.append("\nCertificates with missing standard fields (CN/OU/O/L/ST):\n\n")
+                sb.append("\nСертификаты с отсутствующими стандартными полями (CN/OU/O/L/ST):\n\n")
                 for ((pkg, cert) in nonstandard.take(20)) {
                     val label = resultsMap[pkg]?.label ?: pkg
-                    sb.append("${label} (${pkg})\n  fingerprint: ${cert.fingerprintSha256}\n  missing: ${cert.missing.joinToString(", ")}\n\n")
+                    sb.append("${label} (${pkg})\n  отпечаток: ${cert.fingerprintSha256}\n  отсутствуют: ${cert.missing.joinToString(", ")}\n\n")
                 }
             }
 
             withContext(Dispatchers.Main) {
-                showTextDialog("Signatures analysis", sb.toString())
+                showTextDialog("Анализ подписей", sb.toString())
             }
         }
     }
 
     private fun exportReportToClipboard() {
         if (resultsMap.isEmpty()) {
-            Toast.makeText(this, "No results to export.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Нет результатов для экспорта.", Toast.LENGTH_SHORT).show()
             return
         }
         lifecycleScope.launch(Dispatchers.IO) {
             val sb = StringBuilder()
-            sb.append("AppCheck report\n")
-            sb.append("Generated: ${Date()}\n\n")
+            sb.append("Отчёт AppCheck\n")
+            sb.append("Создан: ${Date()}\n\n")
             for ((pkg, entry) in resultsMap) {
-                sb.append("Label: ${entry.label ?: "<no-label>"}\n")
-                sb.append("Package: ${entry.packageName}\n")
-                sb.append("System: ${entry.isSystem}\n")
-                sb.append("Source: ${entry.sourceDir ?: "?"}\n")
+                sb.append("Название: ${entry.label ?: "<без названия>"}\n")
+                sb.append("Пакет: ${entry.packageName}\n")
+                sb.append("Системное: ${entry.isSystem}\n")
+                sb.append("Источник: ${entry.sourceDir ?: "?"}\n")
                 if (entry.requestedPermissions.isNotEmpty()) {
-                    sb.append("Requested permissions: ${entry.requestedPermissions.size}\n")
+                    sb.append("Запрошено разрешений: ${entry.requestedPermissions.size}\n")
                 }
                 if (entry.signatures.isNotEmpty()) {
-                    sb.append("Signatures:\n")
+                    sb.append("Подписи:\n")
                     for (c in entry.signatures) {
-                        sb.append("  - fingerprint: ${c.fingerprintSha256}\n")
+                        sb.append("  - отпечаток: ${c.fingerprintSha256}\n")
                         if (c.attrs.isNotEmpty()) {
                             val pairs = c.attrs.map { "${it.key}=${it.value}" }
-                            sb.append("    attrs: ${pairs.joinToString(", ")}\n")
+                            sb.append("    атрибуты: ${pairs.joinToString(", ")}\n")
                         }
                         if (c.missing.isNotEmpty()) {
-                            sb.append("    missing: ${c.missing.joinToString(", ")}\n")
+                            sb.append("    отсутствуют: ${c.missing.joinToString(", ")}\n")
                         }
                     }
                 }
@@ -362,45 +362,45 @@ class AppCheckActivity : AppCompatActivity() {
             val text = sb.toString()
             withContext(Dispatchers.Main) {
                 val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
-                val clip = ClipData.newPlainText("AppCheck report", text)
+                val clip = ClipData.newPlainText("Отчёт AppCheck", text)
                 cm.setPrimaryClip(clip)
-                Toast.makeText(this@AppCheckActivity, "Report copied to clipboard", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@AppCheckActivity, "Отчёт скопирован в буфер обмена", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     private fun showAppDetailsDialog(entry: AppEntry) {
         val sb = StringBuilder()
-        sb.append("Label: ${entry.label ?: "<no-label>"}\n")
-        sb.append("Package: ${entry.packageName}\n")
-        sb.append("System: ${entry.isSystem}\n")
-        sb.append("Source: ${entry.sourceDir ?: "?"}\n")
+        sb.append("Название: ${entry.label ?: "<без названия>"}\n")
+        sb.append("Пакет: ${entry.packageName}\n")
+        sb.append("Системное: ${entry.isSystem}\n")
+        sb.append("Источник: ${entry.sourceDir ?: "?"}\n")
         if (!entry.requestedPermissions.isNullOrEmpty()) {
-            sb.append("\nPermissions (${entry.requestedPermissions.size}):\n")
+            sb.append("\nРазрешения (${entry.requestedPermissions.size}):\n")
             for (p in entry.requestedPermissions) {
-                val granted = if (entry.grantedPermissions.contains(p)) " (granted)" else ""
+                val granted = if (entry.grantedPermissions.contains(p)) " (предоставлено)" else ""
                 sb.append("  • $p$granted\n")
             }
         } else {
-            sb.append("\nPermissions: none\n")
+            sb.append("\nРазрешения: нет\n")
         }
 
         if (!entry.signatures.isNullOrEmpty()) {
-            sb.append("\nSignatures:\n")
+            sb.append("\nПодписи:\n")
             for (c in entry.signatures) {
-                sb.append("  • fingerprint: ${c.fingerprintSha256}\n")
+                sb.append("  • отпечаток: ${c.fingerprintSha256}\n")
                 if (c.attrs.isNotEmpty()) {
                     for ((k, v) in c.attrs) {
                         sb.append("      ${k} = ${v}\n")
                     }
                 }
                 if (c.missing.isNotEmpty()) {
-                    sb.append("      MISSING: ${c.missing.joinToString(", ")}\n")
+                    sb.append("      ОТСУТСТВУЮТ: ${c.missing.joinToString(", ")}\n")
                 }
                 sb.append("\n")
             }
         } else {
-            sb.append("\nSignatures: none\n")
+            sb.append("\nПодписи: нет\n")
         }
 
         val tv = TextView(this)
@@ -414,12 +414,12 @@ class AppCheckActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(entry.label ?: entry.packageName)
             .setView(tv)
-            .setPositiveButton("OK", null)
-            .setNeutralButton("Copy package") { _, _ ->
+            .setPositiveButton("ОК", null)
+            .setNeutralButton("Копировать пакет") { _, _ ->
                 val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip = ClipData.newPlainText("package", entry.packageName)
                 cm.setPrimaryClip(clip)
-                Toast.makeText(this, "Package copied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Имя пакета скопировано", Toast.LENGTH_SHORT).show()
             }
             .show()
     }
@@ -436,12 +436,12 @@ class AppCheckActivity : AppCompatActivity() {
         AlertDialog.Builder(this)
             .setTitle(title)
             .setView(tv)
-            .setPositiveButton("OK", null)
-            .setNeutralButton("Copy") { _, _ ->
+            .setPositiveButton("ОК", null)
+            .setNeutralButton("Копировать") { _, _ ->
                 val cm = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
                 val clip = ClipData.newPlainText(title, text)
                 cm.setPrimaryClip(clip)
-                Toast.makeText(this, "Copied to clipboard", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Скопировано в буфер обмена", Toast.LENGTH_SHORT).show()
             }
             .show()
     }
