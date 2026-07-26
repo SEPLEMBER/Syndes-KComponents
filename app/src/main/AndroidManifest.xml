@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="org.syndes.kotlincomponents">
+
+    <!-- Если действительно нужно видеть ВСЕ пакеты, можно оставить QUERY_ALL_PACKAGES.
+         tools:ignore используется только для подавления Lint-предупреждения/ошибки сборки,
+         а не для обхода политики Google Play. -->
+    <uses-permission
+        android:name="android.permission.QUERY_ALL_PACKAGES"
+        tools:ignore="QueryAllPackagesPermission" />
+
+    <queries>
+        <!-- видимость для лаунчер-активностей -->
+        <intent>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent>
+
+        <!-- Примеры конкретных пакетов (указывать точные имена, wildcard не поддерживается) -->
+        <package android:name="com.google.android.gms" />
+        <package android:name="com.samsung.android.app.somepackage" />
+    </queries>
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".EditorActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".AboutActivity"
+            android:exported="false"
+            android:theme="@style/AppTheme" />
+
+                <activity
+            android:name=".InterpreterActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".RustStartActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+
+        <activity
+            android:name=".ReplaceToolActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+
+        <!-- AppCheckActivity (в пакете org.syndes.kotlincomponents) -->
+        <activity
+            android:name=".AppCheckActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+
+                <activity
+            android:name=".BatchRenActivity"
+            android:exported="true"
+            android:theme="@style/AppTheme" />
+
+    </application>
+
+</manifest>
